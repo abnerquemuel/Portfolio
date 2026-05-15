@@ -381,3 +381,21 @@ body {
 }
 
 }
+.menujs li {
+
+	display: block !important;
+	width: 100%;
+	border-bottom: 1px solid grey;
+	padding: 0;
+}
+
+.menujs ul {
+
+	text-align: center;
+	height: auto;
+}
+
+.menujs .threeline-icon {
+
+	display: block !important;
+}
