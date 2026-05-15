@@ -315,8 +315,8 @@ body {
 .profile-title h1 {
 
 	margin-top: 30px;
-	font-size: 55px;
-	line-height: 55px;
+	font-size: 70px;
+	line-height: 70px;
 
 	margin-left: 20px;
 	margin-right: 20px;
@@ -324,8 +324,8 @@ body {
 
 .profile-title h2 {
 
-	font-size: 24px;
-	line-height: 35px;
+	font-size: 28px;
+	line-height: 42px;
 
 	margin-top: 20px;
 	margin-left: 20px;
@@ -340,8 +340,8 @@ body {
 
 .social-icon {
 
-	width: 55px;
-	height: 55px;
+	width: 70px;
+	height: 70px;
 }
 
 .main {
@@ -355,8 +355,8 @@ body {
 .main p {
 
 	text-align: left;
-	line-height: 30px;
-	font-size: 16px;
+	line-height: 34px;
+	font-size: 20px;
 }
 
 .main img{
