@@ -239,13 +239,15 @@ body {
 
 .project-list {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
 	gap: 24px;
 	margin-top: 28px;
 }
 
 .project-card {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	aspect-ratio: 1 / 1;
 	overflow: hidden;
 	border: 1px solid #444;
 	border-radius: 8px;
@@ -260,7 +262,8 @@ body {
 }
 
 .project-preview {
-	height: 180px;
+	height: 50%;
+	min-height: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -287,6 +290,7 @@ body {
 }
 
 .project-info {
+	flex: 1;
 	padding: 20px;
 }
 
