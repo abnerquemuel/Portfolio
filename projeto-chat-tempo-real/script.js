@@ -82,7 +82,7 @@ function sendMessage(text) {
   scheduleBotReply(text);
 }
 
-function getBotReply(text) {
+function getLocalBotReply(text) {
   const normalized = text
     .toLowerCase()
     .normalize("NFD")
@@ -108,16 +108,76 @@ function getBotReply(text) {
     return "De nada! Estou por aqui.";
   }
 
-  return "Entendi. Me conte um pouco mais sobre isso.";
+  return null;
+}
+
+async function searchWikipedia(text) {
+  const searchUrl = new URL("https://pt.wikipedia.org/w/api.php");
+  searchUrl.search = new URLSearchParams({
+    action: "query",
+    format: "json",
+    list: "search",
+    origin: "*",
+    srsearch: text
+  });
+
+  const searchResponse = await fetch(searchUrl);
+  if (!searchResponse.ok) return null;
+
+  const searchData = await searchResponse.json();
+  const title = searchData.query?.search?.[0]?.title;
+  if (!title) return null;
+
+  const summaryUrl = new URL("https://pt.wikipedia.org/w/api.php");
+  summaryUrl.search = new URLSearchParams({
+    action: "query",
+    exintro: "1",
+    explaintext: "1",
+    format: "json",
+    inprop: "url",
+    origin: "*",
+    prop: "extracts|info",
+    redirects: "1",
+    titles: title
+  });
+
+  const summaryResponse = await fetch(summaryUrl);
+  if (!summaryResponse.ok) return null;
+
+  const summaryData = await summaryResponse.json();
+  const pages = Object.values(summaryData.query?.pages || {});
+  const page = pages.find((item) => item.extract);
+  if (!page) return null;
+
+  const extract = page.extract.length > 520
+    ? `${page.extract.slice(0, 520).replace(/\s+\S*$/, "")}...`
+    : page.extract;
+
+  return `${extract}\n\nFonte: Wikipedia - ${page.fullurl}`;
+}
+
+async function getBotReply(text) {
+  const localReply = getLocalBotReply(text);
+  if (localReply) return localReply;
+
+  try {
+    const internetReply = await searchWikipedia(text);
+    if (internetReply) return internetReply;
+  } catch {
+    return "Tentei pesquisar na internet, mas nao consegui buscar a resposta agora.";
+  }
+
+  return "Pesquisei, mas nao encontrei uma resposta confiavel para essa pergunta.";
 }
 
 function scheduleBotReply(text) {
-  window.setTimeout(() => {
+  window.setTimeout(async () => {
+    const replyText = await getBotReply(text);
     const reply = {
       id: crypto.randomUUID(),
       userId: botUserId,
       name: botName,
-      text: getBotReply(text),
+      text: replyText,
       createdAt: new Date().toISOString()
     };
 

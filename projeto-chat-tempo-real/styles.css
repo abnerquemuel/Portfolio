@@ -176,6 +176,7 @@ input:disabled {
 .message-text {
   margin: 0;
   overflow-wrap: anywhere;
+  white-space: pre-line;
   font-size: 15px;
   line-height: 21px;
 }
