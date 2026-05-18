@@ -289,6 +289,32 @@ body {
 	font-size: 22px;
 }
 
+.chat-preview {
+	position: relative;
+	background: linear-gradient(135deg, #eef1f4 0%, #cfd6df 100%);
+}
+
+.chat-preview span,
+.chat-preview strong {
+	position: absolute;
+	display: block;
+	width: 58px;
+	height: 28px;
+	border-radius: 8px;
+}
+
+.chat-preview span {
+	top: 26px;
+	left: 18px;
+	background-color: #f0f3f7;
+}
+
+.chat-preview strong {
+	right: 18px;
+	bottom: 26px;
+	background-color: #2f80ed;
+}
+
 .project-info {
 	flex: 1;
 	padding: 8px;

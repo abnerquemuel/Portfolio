@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat em Tempo Real</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="chat-shell">
+    <section class="chat-app" aria-label="Chat em tempo real">
+      <header class="chat-header">
+        <div>
+          <span class="status-dot"></span>
+          <span class="status-text">Online</span>
+        </div>
+        <button type="button" id="clearChat">Limpar</button>
+      </header>
+
+      <section class="identity-panel" id="identityPanel">
+        <h1>Chat em tempo real</h1>
+        <p>Abra este projeto em duas abas para ver as mensagens chegando na hora.</p>
+        <form id="nameForm">
+          <label for="nameInput">Seu nome</label>
+          <div class="input-row">
+            <input id="nameInput" name="name" type="text" maxlength="24" placeholder="Digite seu nome" required>
+            <button type="submit">Entrar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="messages" id="messages" aria-live="polite"></section>
+
+      <form class="message-form" id="messageForm">
+        <input id="messageInput" type="text" maxlength="180" placeholder="Digite uma mensagem..." autocomplete="off" disabled>
+        <button type="submit" disabled>Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
