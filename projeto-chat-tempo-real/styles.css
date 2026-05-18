@@ -183,6 +183,8 @@ input:disabled {
 .message-form {
   padding: 14px;
   border-top: 1px solid var(--line);
+  width: min(100%, 430px);
+  justify-self: center;
 }
 
 @media (max-width: 520px) {
