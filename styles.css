@@ -237,6 +237,79 @@ body {
 	margin: 5px;
 }
 
+.project-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 24px;
+	margin-top: 28px;
+}
+
+.project-card {
+	display: block;
+	overflow: hidden;
+	border: 1px solid #444;
+	border-radius: 8px;
+	background-color: #343434;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+.project-card:hover {
+	border-color: #FF9B42;
+	transform: translateY(-4px);
+}
+
+.project-preview {
+	height: 180px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.calculator-preview {
+	gap: 18px;
+	background: linear-gradient(135deg, #d7dbe0 0%, #b8bec7 100%);
+	color: #20242c;
+	font-size: 52px;
+	font-weight: 400;
+}
+
+.calculator-preview strong {
+	width: 64px;
+	height: 64px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	background-color: #f0b429;
+	color: #1d1603;
+	font-size: 42px;
+}
+
+.project-info {
+	padding: 20px;
+}
+
+.project-info h3 {
+	margin-top: 0;
+	margin-bottom: 10px;
+	color: #FF9B42;
+	font-size: 16px;
+}
+
+.project-info p {
+	margin-top: 0;
+	margin-bottom: 18px;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: left;
+}
+
+.project-info span {
+	color: #FF9B42;
+	font-size: 14px;
+}
+
 .back-link {
 	color: #f27609;
 }

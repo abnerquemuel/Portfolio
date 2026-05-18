@@ -1,0 +1,151 @@
+:root {
+  color-scheme: light;
+  --page: #d7dbe0;
+  --panel: #20242c;
+  --display: #11141a;
+  --text: #f8fafc;
+  --muted: #9ca7b8;
+  --key: #f7f8fa;
+  --key-text: #1b1f27;
+  --operator: #f0b429;
+  --operator-text: #1d1603;
+  --utility: #d7dee8;
+  --equals: #2f80ed;
+  --shadow: 0 24px 70px rgba(31, 35, 43, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(47, 128, 237, 0.12), transparent 32rem),
+    linear-gradient(135deg, #d7dbe0 0%, #b8bec7 100%);
+  color: var(--text);
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.calculator {
+  width: min(100%, 380px);
+  padding: 18px;
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.display {
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 22px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: var(--display);
+  overflow: hidden;
+  text-align: right;
+}
+
+.expression,
+.result {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expression {
+  min-height: 24px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.result {
+  min-height: 48px;
+  color: var(--text);
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.key {
+  min-height: 64px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--key);
+  color: var(--key-text);
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+}
+
+.key:hover {
+  filter: brightness(0.96);
+  transform: translateY(-1px);
+}
+
+.key:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.key:focus-visible {
+  outline: 3px solid rgba(47, 128, 237, 0.45);
+  outline-offset: 2px;
+}
+
+.utility {
+  background: var(--utility);
+}
+
+.operator {
+  background: var(--operator);
+  color: var(--operator-text);
+}
+
+.equals {
+  background: var(--equals);
+  color: white;
+}
+
+.zero {
+  grid-column: span 2;
+}
+
+@media (max-width: 420px) {
+  .shell {
+    padding: 14px;
+  }
+
+  .calculator {
+    padding: 14px;
+  }
+
+  .key {
+    min-height: 58px;
+    font-size: 22px;
+  }
+
+  .result {
+    font-size: 36px;
+  }
+}
