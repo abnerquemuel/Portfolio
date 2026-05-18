@@ -14,6 +14,9 @@ const userId = crypto.randomUUID();
 let userName = localStorage.getItem("portfolio-chat-name") || "";
 let messages = loadMessages();
 
+const botUserId = "portfolio-chat-bot";
+const botName = "Bot";
+
 function loadMessages() {
   try {
     return JSON.parse(localStorage.getItem(storageKey)) || [];
@@ -76,6 +79,53 @@ function sendMessage(text) {
   saveMessages();
   renderMessages();
   channel.postMessage({ type: "message", message });
+  scheduleBotReply(text);
+}
+
+function getBotReply(text) {
+  const normalized = text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (normalized.includes("oi") || normalized.includes("ola")) {
+    return `Oi, ${userName}! Como posso ajudar hoje?`;
+  }
+
+  if (normalized.includes("tudo bem")) {
+    return "Tudo certo por aqui. E com voce?";
+  }
+
+  if (normalized.includes("calculadora")) {
+    return "A calculadora ja esta no seu portfolio. Ficou um bom primeiro projeto.";
+  }
+
+  if (normalized.includes("portfolio")) {
+    return "Seu portfolio esta ganhando projetos bem legais. Continue adicionando exemplos praticos.";
+  }
+
+  if (normalized.includes("obrigado") || normalized.includes("valeu")) {
+    return "De nada! Estou por aqui.";
+  }
+
+  return "Entendi. Me conte um pouco mais sobre isso.";
+}
+
+function scheduleBotReply(text) {
+  window.setTimeout(() => {
+    const reply = {
+      id: crypto.randomUUID(),
+      userId: botUserId,
+      name: botName,
+      text: getBotReply(text),
+      createdAt: new Date().toISOString()
+    };
+
+    messages.push(reply);
+    saveMessages();
+    renderMessages();
+    channel.postMessage({ type: "message", message: reply });
+  }, 700);
 }
 
 nameForm.addEventListener("submit", (event) => {

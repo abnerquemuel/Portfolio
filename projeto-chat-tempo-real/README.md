@@ -1,6 +1,6 @@
 # Chat em Tempo Real
 
-Chat simples feito com HTML, CSS e JavaScript.
+Chat simples feito com HTML, CSS e JavaScript, com resposta automatica de bot.
 
 ## Como testar
 
