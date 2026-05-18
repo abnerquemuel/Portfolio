@@ -41,7 +41,7 @@ input {
   width: min(100%, 620px);
   height: min(820px, calc(100vh - 112px));
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   overflow: hidden;
   border-radius: 8px;
   background: var(--panel);
@@ -182,7 +182,8 @@ input:disabled {
 
 .message-form {
   height: 100px;
-  align-items: center;
+  align-items: end;
+  align-self: end;
   padding: 14px;
   border-top: 1px solid var(--line);
   width: min(100%, 430px);
