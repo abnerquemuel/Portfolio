@@ -239,7 +239,7 @@ body {
 
 .project-list {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+	grid-template-columns: repeat(auto-fit, 130px);
 	gap: 24px;
 	margin-top: 28px;
 }
@@ -270,38 +270,39 @@ body {
 }
 
 .calculator-preview {
-	gap: 18px;
+	gap: 8px;
 	background: linear-gradient(135deg, #d7dbe0 0%, #b8bec7 100%);
 	color: #20242c;
-	font-size: 40px;
+	font-size: 24px;
 	font-weight: 400;
 }
 
 .calculator-preview strong {
-	width: 52px;
-	height: 52px;
+	width: 32px;
+	height: 32px;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 8px;
 	background-color: #f0b429;
 	color: #1d1603;
-	font-size: 34px;
+	font-size: 22px;
 }
 
 .project-info {
 	flex: 1;
-	padding: 16px;
+	padding: 8px;
 }
 
 .project-info h3 {
 	margin-top: 0;
-	margin-bottom: 10px;
+	margin-bottom: 6px;
 	color: #FF9B42;
-	font-size: 16px;
+	font-size: 12px;
 }
 
 .project-info p {
+	display: none;
 	margin-top: 0;
 	margin-bottom: 14px;
 	font-size: 14px;
@@ -311,7 +312,7 @@ body {
 
 .project-info span {
 	color: #FF9B42;
-	font-size: 14px;
+	font-size: 11px;
 }
 
 .back-link {
