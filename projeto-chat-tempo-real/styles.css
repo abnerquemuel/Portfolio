@@ -38,8 +38,8 @@ input {
 }
 
 .chat-app {
-  width: min(100%, 460px);
-  height: min(720px, calc(100vh - 112px));
+  width: min(100%, 620px);
+  height: min(820px, calc(100vh - 112px));
   display: grid;
   grid-template-rows: auto auto 1fr auto;
   overflow: hidden;
