@@ -63,18 +63,6 @@ input {
   gap: 8px;
 }
 
-.status-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #24a148;
-}
-
-.status-text {
-  color: var(--muted);
-  font-size: 14px;
-}
-
 .chat-header button,
 .message-form button,
 .input-row button {
