@@ -118,15 +118,52 @@ function drawGrid() {
 }
 
 function drawSnake() {
+  context.lineCap = "round";
+  context.lineJoin = "round";
+  context.strokeStyle = "#1a9f3b";
+  context.lineWidth = tileSize - 7;
+
+  context.beginPath();
   snake.forEach((part, index) => {
-    context.fillStyle = index === 0 ? "#31d158" : "#1a9f3b";
-    context.fillRect(
-      part.x * tileSize + 2,
-      part.y * tileSize + 2,
-      tileSize - 4,
-      tileSize - 4
-    );
+    const centerX = part.x * tileSize + tileSize / 2;
+    const centerY = part.y * tileSize + tileSize / 2;
+
+    if (index === 0) {
+      context.moveTo(centerX, centerY);
+    } else {
+      context.lineTo(centerX, centerY);
+    }
   });
+  context.stroke();
+
+  const head = snake[0];
+  const headX = head.x * tileSize + tileSize / 2;
+  const headY = head.y * tileSize + tileSize / 2;
+
+  context.fillStyle = "#31d158";
+  context.beginPath();
+  context.arc(headX, headY, tileSize / 2 - 3, 0, Math.PI * 2);
+  context.fill();
+
+  drawSnakeEyes(headX, headY);
+}
+
+function drawSnakeEyes(headX, headY) {
+  const horizontal = direction.x !== 0;
+  const eyeOffsetX = horizontal ? direction.x * 5 : 5;
+  const eyeOffsetY = horizontal ? 5 : direction.y * 5;
+
+  context.fillStyle = "#f4f6f8";
+  context.beginPath();
+  context.arc(headX + eyeOffsetX, headY - eyeOffsetY, 3, 0, Math.PI * 2);
+  context.arc(headX + eyeOffsetX, headY + eyeOffsetY, 3, 0, Math.PI * 2);
+  context.fill();
+
+  context.fillStyle = "#11151b";
+  context.beginPath();
+  context.arc(headX + eyeOffsetX + direction.x, headY - eyeOffsetY + direction.y, 1.4, 0, Math.PI * 2);
+  context.arc(headX + eyeOffsetX + direction.x, headY + eyeOffsetY + direction.y, 1.4, 0, Math.PI * 2);
+  context.fill();
 }
 
 function drawFood() {
