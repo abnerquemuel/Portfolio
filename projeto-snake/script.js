@@ -30,7 +30,7 @@ function startGame() {
   playButton.textContent = "Reiniciar";
 
   clearInterval(gameLoop);
-  gameLoop = setInterval(updateGame, 230);
+  gameLoop = setInterval(updateGame, 200);
   drawGame();
 }
 
