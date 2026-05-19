@@ -315,6 +315,32 @@ body {
 	background-color: #2f80ed;
 }
 
+.snake-preview {
+	position: relative;
+	background: #171c23;
+}
+
+.snake-preview span {
+	position: absolute;
+	width: 70px;
+	height: 12px;
+	border-radius: 8px;
+	background-color: #31d158;
+	box-shadow:
+		18px 18px 0 #1a9f3b,
+		36px 18px 0 #1a9f3b;
+}
+
+.snake-preview strong {
+	position: absolute;
+	right: 24px;
+	top: 18px;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background-color: #ff3b30;
+}
+
 .project-info {
 	flex: 1;
 	padding: 8px;
