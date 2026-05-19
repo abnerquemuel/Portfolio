@@ -4,6 +4,7 @@ html, body {
 	padding: 0;
 	background-color: #2b2b2b;
 	font-family: "Montserrat", sans-serif;
+	overflow-x: hidden;
 }
 
 
@@ -59,9 +60,6 @@ html, body {
 	color: #FF9B42;
 }
 
-.navigation {
-	background-color: ;
-}
 /* CAPA */
 
 .capa {
@@ -153,10 +151,11 @@ html, body {
 
 .main {
 
+	max-width: 980px;
 	padding-top: 40px;
-	padding-right: 180px;
+	padding-right: clamp(32px, 10vw, 180px);
 	padding-bottom: 80px;
-	padding-left: 100px;
+	padding-left: clamp(32px, 7vw, 100px);
 
 	animation-name: conteudo;
 	animation-duration: 3s;
@@ -192,6 +191,13 @@ html, body {
 	font-weight: 100;
 	line-height: 24px;
 	text-align: justify;
+	overflow-wrap: anywhere;
+}
+
+.main img {
+	max-width: 280px;
+	height: auto;
+	border-radius: 8px;
 }
 
 
@@ -241,6 +247,7 @@ body {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 130px);
 	gap: 24px;
+	justify-content: start;
 	margin-top: 28px;
 }
 
@@ -380,6 +387,8 @@ body {
 
 .back-link {
 	color: #f27609;
+	display: inline-block;
+	margin-top: 20px;
 }
 
 @keyframes profile-capa {
@@ -422,8 +431,8 @@ body {
 
 .navigation li.threeline-icon {
 	display: inline-block;
-	font-size: 42px;
-	padding-top: 10px;
+	font-size: 34px;
+	padding-top: 6px;
 }
 
 .menujs li {
@@ -445,7 +454,8 @@ body {
 .profile-pic img {
 
 	margin-top: 20px;
-	max-width: 95%;
+	width: min(240px, 78vw);
+	max-width: 100%;
 }
 
 .profile-title {
@@ -455,9 +465,9 @@ body {
 
 .profile-title h1 {
 
-	margin-top: 30px;
-	font-size: 70px;
-	line-height: 70px;
+	margin-top: 24px;
+	font-size: clamp(38px, 13vw, 54px);
+	line-height: 1.02;
 
 	margin-left: 20px;
 	margin-right: 20px;
@@ -465,8 +475,8 @@ body {
 
 .profile-title h2 {
 
-	font-size: 28px;
-	line-height: 42px;
+	font-size: clamp(17px, 5vw, 22px);
+	line-height: 1.45;
 
 	margin-top: 20px;
 	margin-left: 20px;
@@ -481,28 +491,44 @@ body {
 
 .social-icon {
 
-	width: 70px;
-	height: 70px;
+	width: 48px;
+	height: 48px;
 }
 
 .main {
 
-	padding-top: 15px;
-	padding-right: 20px;
+	padding-top: 18px;
+	padding-right: 18px;
 	padding-bottom: 40px;
-	padding-left: 20px;
+	padding-left: 18px;
+}
+
+.main h1 {
+	font-size: 32px;
+	line-height: 38px;
+}
+
+.main h2 {
+	font-size: 14px;
+	line-height: 20px;
+	margin-top: 32px;
+}
+
+.main h3 {
+	font-size: 12px;
+	line-height: 18px;
 }
 
 .main p {
 
 	text-align: left;
-	line-height: 34px;
-	font-size: 20px;
+	line-height: 26px;
+	font-size: 16px;
 }
 
 .main img{
 
-	width: 100%;
+	width: min(100%, 280px);
 	max-width:100%;
 	height:auto;
 
@@ -510,9 +536,25 @@ body {
 	margin-right:0;
 }
 
+.main .social-img {
+	width: 52px;
+	max-width: 52px;
+}
+
 .caminho li {
 
 	font-size: 12px;
+}
+
+.project-list {
+	grid-template-columns: repeat(auto-fit, minmax(116px, 130px));
+	justify-content: center;
+	gap: 16px;
+}
+
+.project-info h3 {
+	font-size: 11px;
+	line-height: 14px;
 }
 
 .miniatura {
@@ -539,4 +581,37 @@ body {
 .menujs .threeline-icon {
 
 	display: block !important;
+}
+
+@media (max-width: 420px) {
+	.navigation li.threeline-icon {
+		font-size: 30px;
+	}
+
+	.profile-title h1 {
+		font-size: 38px;
+		margin-left: 14px;
+		margin-right: 14px;
+	}
+
+	.profile-title h2 {
+		font-size: 16px;
+		margin-left: 18px;
+		margin-right: 18px;
+	}
+
+	.main {
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.main h1 {
+		font-size: 28px;
+		line-height: 34px;
+	}
+
+	.project-list {
+		grid-template-columns: repeat(2, minmax(112px, 128px));
+		gap: 14px;
+	}
 }
