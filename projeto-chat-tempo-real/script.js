@@ -92,7 +92,7 @@ function normalizeText(text) {
 function getLocalBotReply(text) {
   const normalized = normalizeText(text);
 
-  if (/\b(oi|ola|olá|bom dia|boa tarde|boa noite)\b/.test(normalized)) {
+  if (/\b(oi|ola|bom dia|boa tarde|boa noite)\b/.test(normalized)) {
     return `Oi, ${userName}! Como posso ajudar hoje?`;
   }
 
@@ -124,15 +124,56 @@ function getLocalBotReply(text) {
   return null;
 }
 
+function getKnownAnswer(text) {
+  const normalized = normalizeText(text);
+
+  if (/\bquem\s+(descobriu|encontrou|chegou\s+ao?)\s+(o\s+)?brasil\b/.test(normalized)) {
+    return {
+      title: "Descobrimento do Brasil",
+      answer: "Pela versao historica mais conhecida, Pedro Alvares Cabral chegou ao Brasil em 22 de abril de 1500, comandando uma expedicao portuguesa.",
+      url: "https://pt.wikipedia.org/wiki/Descobrimento_do_Brasil"
+    };
+  }
+
+  if (/\bquem\s+(inventou|criou)\s+(a\s+)?internet\b/.test(normalized)) {
+    return {
+      title: "Internet",
+      answer: "A internet nao foi criada por uma unica pessoa. Uma parte essencial da tecnologia foi desenvolvida por Vint Cerf e Bob Kahn, que criaram o protocolo TCP/IP.",
+      url: "https://pt.wikipedia.org/wiki/Internet"
+    };
+  }
+
+  return null;
+}
+
 function buildSearchQuery(text) {
   return normalizeText(text)
     .replace(/[?!.,;:()[\]{}"']/g, " ")
     .replace(/\b(pesquise|pesquisar|procure|procurar|busque|buscar)\b/g, " ")
     .replace(/\b(me fala sobre|me fale sobre|fale sobre|me diga sobre|explique sobre)\b/g, " ")
-    .replace(/\b(o que e|o que eh|quem e|quem foi|qual e|qual foi|onde fica|quando foi|para que serve|como funciona)\b/g, " ")
+    .replace(/\b(o que e|o que eh|quem e|quem foi|quem descobriu|quem inventou|quem criou|qual e|qual foi|onde fica|quando foi|para que serve|como funciona)\b/g, " ")
+    .replace(/\b(o|a|os|as|um|uma|uns|umas|do|da|dos|das|de|em|no|na|nos|nas)\b/g, " ")
     .replace(/\b(pra mim|para mim|por favor|pfv)\b/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function getQueryWords(text) {
+  return buildSearchQuery(text)
+    .split(" ")
+    .filter((word) => word.length > 2);
+}
+
+function scoreSearchResult(result, queryWords) {
+  const title = normalizeText(result.title || "");
+  const snippet = normalizeText(result.snippet || "").replace(/<[^>]*>/g, " ");
+  const searchable = `${title} ${snippet}`;
+  const matches = queryWords.filter((word) => searchable.includes(word)).length;
+  const extraTitleWords = title
+    .split(/\s+/)
+    .filter((word) => word.length > 2 && !queryWords.includes(word)).length;
+
+  return matches * 10 - extraTitleWords;
 }
 
 function trimExtract(extract) {
@@ -147,6 +188,7 @@ function trimExtract(extract) {
 
 async function searchWikipedia(text) {
   const query = buildSearchQuery(text);
+  const queryWords = getQueryWords(text);
   if (query.length < 3) return null;
 
   const searchUrl = new URL("https://pt.wikipedia.org/w/api.php");
@@ -163,7 +205,11 @@ async function searchWikipedia(text) {
   if (!searchResponse.ok) return null;
 
   const searchData = await searchResponse.json();
-  const title = searchData.query?.search?.find((result) => result.title)?.title;
+  const results = searchData.query?.search || [];
+  const bestResult = results
+    .filter((result) => result.title)
+    .sort((first, second) => scoreSearchResult(second, queryWords) - scoreSearchResult(first, queryWords))[0];
+  const title = bestResult?.title;
   if (!title) return null;
 
   const summaryUrl = new URL("https://pt.wikipedia.org/w/api.php");
@@ -197,6 +243,11 @@ async function searchWikipedia(text) {
 async function getBotReply(text) {
   const localReply = getLocalBotReply(text);
   if (localReply) return localReply;
+
+  const knownAnswer = getKnownAnswer(text);
+  if (knownAnswer) {
+    return `${knownAnswer.answer}\n\nFonte: ${knownAnswer.title} - ${knownAnswer.url}`;
+  }
 
   try {
     const result = await searchWikipedia(text);
