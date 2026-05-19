@@ -9,9 +9,13 @@ const tileSize = canvas.width / tileCount;
 
 let snake;
 let food;
+let specialFood;
+let enemy;
 let direction;
 let nextDirection;
 let score;
+let growthRemaining;
+let moveCount;
 let gameLoop;
 let running = false;
 
@@ -24,7 +28,11 @@ function startGame() {
   direction = { x: 1, y: 0 };
   nextDirection = { x: 1, y: 0 };
   score = 0;
+  growthRemaining = 0;
+  moveCount = 0;
   food = createFood();
+  specialFood = null;
+  enemy = null;
   running = true;
   scoreEl.textContent = score;
   playButton.textContent = "Reiniciar";
@@ -35,6 +43,10 @@ function startGame() {
 }
 
 function createFood() {
+  return createEmptyPosition();
+}
+
+function createEmptyPosition() {
   let position;
 
   do {
@@ -42,13 +54,20 @@ function createFood() {
       x: Math.floor(Math.random() * tileCount),
       y: Math.floor(Math.random() * tileCount)
     };
-  } while (snake.some((part) => part.x === position.x && part.y === position.y));
+  } while (
+    snake.some((part) => part.x === position.x && part.y === position.y) ||
+    (food && food.x === position.x && food.y === position.y) ||
+    (specialFood && specialFood.x === position.x && specialFood.y === position.y) ||
+    (enemy && enemy.x === position.x && enemy.y === position.y)
+  );
 
   return position;
 }
 
 function updateGame() {
+  moveCount += 1;
   direction = nextDirection;
+  moveEnemy();
 
   const head = {
     x: snake[0].x + direction.x,
@@ -57,8 +76,9 @@ function updateGame() {
 
   const hitWall = head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount;
   const hitBody = snake.some((part) => part.x === head.x && part.y === head.y);
+  const hitEnemy = enemy && head.x === enemy.x && head.y === enemy.y;
 
-  if (hitWall || hitBody) {
+  if (hitWall || hitBody || hitEnemy) {
     endGame();
     return;
   }
@@ -67,8 +87,32 @@ function updateGame() {
 
   if (head.x === food.x && head.y === food.y) {
     score += 10;
+    growthRemaining += 1;
     scoreEl.textContent = score;
     food = createFood();
+    if (!specialFood && Math.random() < 0.28) {
+      specialFood = createEmptyPosition();
+    }
+  }
+
+  if (specialFood && head.x === specialFood.x && head.y === specialFood.y) {
+    score += 30;
+    growthRemaining += 3;
+    scoreEl.textContent = score;
+    specialFood = null;
+  }
+
+  if (enemy && snake.some((part) => part.x === enemy.x && part.y === enemy.y)) {
+    endGame();
+    return;
+  }
+
+  if (!enemy && moveCount > 12 && moveCount % 18 === 0) {
+    enemy = createEmptyPosition();
+  }
+
+  if (growthRemaining > 0) {
+    growthRemaining -= 1;
   } else {
     snake.pop();
   }
@@ -96,6 +140,8 @@ function drawGame() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   drawGrid();
   drawFood();
+  drawSpecialFood();
+  drawEnemy();
   drawSnake();
 }
 
@@ -186,6 +232,80 @@ function drawFood() {
   context.fill();
 }
 
+function drawSpecialFood() {
+  if (!specialFood) return;
+  drawApple(specialFood, "#8e44ff", "#5c2aa8", "#31d158");
+}
+
+function drawApple(position, color, shadowColor, leafColor) {
+  const centerX = position.x * tileSize + tileSize / 2;
+  const centerY = position.y * tileSize + tileSize / 2 + 2;
+  const radius = tileSize / 2 - 4;
+
+  context.fillStyle = color;
+  context.beginPath();
+  context.arc(centerX - 4, centerY, radius * 0.72, 0, Math.PI * 2);
+  context.arc(centerX + 4, centerY, radius * 0.72, 0, Math.PI * 2);
+  context.fill();
+
+  context.fillStyle = shadowColor;
+  context.beginPath();
+  context.arc(centerX + 4, centerY + 4, radius * 0.38, 0, Math.PI * 2);
+  context.fill();
+
+  context.fillStyle = "#7a3f16";
+  context.fillRect(centerX - 1.5, centerY - radius - 4, 3, 8);
+
+  context.fillStyle = leafColor;
+  context.beginPath();
+  context.ellipse(centerX + 6, centerY - radius - 3, 6, 3, -0.45, 0, Math.PI * 2);
+  context.fill();
+}
+
+function moveEnemy() {
+  if (!enemy) return;
+
+  if (moveCount % 2 !== 0) {
+    return;
+  }
+
+  const head = snake[0];
+  const deltaX = head.x - enemy.x;
+  const deltaY = head.y - enemy.y;
+
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    enemy.x += Math.sign(deltaX);
+  } else if (deltaY !== 0) {
+    enemy.y += Math.sign(deltaY);
+  } else if (deltaX !== 0) {
+    enemy.x += Math.sign(deltaX);
+  }
+}
+
+function drawEnemy() {
+  if (!enemy) return;
+
+  const centerX = enemy.x * tileSize + tileSize / 2;
+  const centerY = enemy.y * tileSize + tileSize / 2;
+
+  context.fillStyle = "#c084fc";
+  context.beginPath();
+  context.arc(centerX, centerY, tileSize / 2 - 4, 0, Math.PI * 2);
+  context.fill();
+
+  context.fillStyle = "#11151b";
+  context.beginPath();
+  context.arc(centerX - 5, centerY - 3, 2.5, 0, Math.PI * 2);
+  context.arc(centerX + 5, centerY - 3, 2.5, 0, Math.PI * 2);
+  context.fill();
+
+  context.strokeStyle = "#11151b";
+  context.lineWidth = 2;
+  context.beginPath();
+  context.arc(centerX, centerY + 4, 6, 0.15, Math.PI - 0.15);
+  context.stroke();
+}
+
 function changeDirection(newDirection) {
   if (!running) return;
 
@@ -233,4 +353,8 @@ controlButtons.forEach((button) => {
 
 snake = [{ x: 10, y: 10 }];
 food = { x: 14, y: 10 };
+specialFood = null;
+enemy = null;
+direction = { x: 1, y: 0 };
+nextDirection = { x: 1, y: 0 };
 drawGame();
