@@ -152,6 +152,16 @@ function getKnownAnswer(text) {
     };
   }
 
+  if (/\bquem\s+(colonizou|colonizava|colonizou\s+o|dominou)\s+(o\s+)?brasil\b/.test(normalized)) {
+    return {
+      title: "Colonizacao do Brasil",
+      subject: "Portugal",
+      intent: "colonizer",
+      answer: "O Brasil foi colonizado por Portugal. A colonizacao portuguesa comecou no seculo XVI, apos a chegada da expedicao de Pedro Alvares Cabral em 1500.",
+      url: "https://pt.wikipedia.org/wiki/Brasil_Col%C3%B4nia"
+    };
+  }
+
   if (/\bquem\s+(inventou|criou)\s+(a\s+)?internet\b/.test(normalized)) {
     return {
       title: "Internet",
@@ -178,6 +188,10 @@ function getContextReply(text) {
 
   if (chatContext.intent === "inventor" && /\b(inventou|criou)\b/.test(normalized)) {
     return `Sim, eu estava falando de ${chatContext.subject}. Esse foi o nome ligado a resposta anterior.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
+  }
+
+  if (chatContext.intent === "colonizer" && /\b(colonizou|colonizava|dominou)\b/.test(normalized)) {
+    return `Sim. Eu estava falando de ${chatContext.subject}. Foi Portugal que colonizou o Brasil.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
   }
 
   return `Voce esta falando de ${chatContext.title}. Resumo: ${chatContext.answer}\n\nFonte: ${chatContext.url}`;
