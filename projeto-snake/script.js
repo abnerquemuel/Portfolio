@@ -130,15 +130,22 @@ function drawSnake() {
 }
 
 function drawFood() {
+  const centerX = food.x * tileSize + tileSize / 2;
+  const centerY = food.y * tileSize + tileSize / 2 + 2;
+  const radius = tileSize / 2 - 4;
+
   context.fillStyle = "#ff3b30";
   context.beginPath();
-  context.arc(
-    food.x * tileSize + tileSize / 2,
-    food.y * tileSize + tileSize / 2,
-    tileSize / 2 - 3,
-    0,
-    Math.PI * 2
-  );
+  context.arc(centerX - 4, centerY, radius * 0.72, 0, Math.PI * 2);
+  context.arc(centerX + 4, centerY, radius * 0.72, 0, Math.PI * 2);
+  context.fill();
+
+  context.fillStyle = "#7a3f16";
+  context.fillRect(centerX - 1.5, centerY - radius - 4, 3, 8);
+
+  context.fillStyle = "#31d158";
+  context.beginPath();
+  context.ellipse(centerX + 6, centerY - radius - 3, 6, 3, -0.45, 0, Math.PI * 2);
   context.fill();
 }
 

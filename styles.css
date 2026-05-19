@@ -354,9 +354,32 @@ body {
 	top: 22px;
 	width: 16px;
 	height: 16px;
-	border-radius: 50%;
+	border-radius: 50% 50% 48% 48%;
 	background-color: #ff3b30;
 	box-shadow: 0 0 14px rgba(255, 59, 48, 0.55);
+}
+
+.snake-preview strong::before {
+	content: "";
+	position: absolute;
+	left: 7px;
+	top: -7px;
+	width: 3px;
+	height: 8px;
+	border-radius: 2px;
+	background-color: #7a3f16;
+}
+
+.snake-preview strong::after {
+	content: "";
+	position: absolute;
+	right: -5px;
+	top: -7px;
+	width: 8px;
+	height: 4px;
+	border-radius: 8px;
+	background-color: #31d158;
+	transform: rotate(-25deg);
 }
 
 .project-info {
