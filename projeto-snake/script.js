@@ -102,7 +102,7 @@ function updateGame() {
     specialFood = null;
   }
 
-  if (enemy && snake.some((part) => part.x === enemy.x && part.y === enemy.y)) {
+  if (enemy && snake[0].x === enemy.x && snake[0].y === enemy.y) {
     endGame();
     return;
   }
