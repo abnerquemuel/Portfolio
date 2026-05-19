@@ -10,6 +10,7 @@ const clearButton = document.querySelector("#clearChat");
 const channel = new BroadcastChannel("portfolio-chat");
 const storageKey = "portfolio-chat-messages";
 const contextKey = "portfolio-chat-context";
+const aiEndpointKey = "portfolio-chat-ai-endpoint";
 const userId = crypto.randomUUID();
 
 let userName = localStorage.getItem("portfolio-chat-name") || "";
@@ -95,6 +96,41 @@ function sendMessage(text) {
   renderMessages();
   channel.postMessage({ type: "message", message });
   scheduleBotReply(text);
+}
+
+function getAiEndpoint() {
+  return localStorage.getItem(aiEndpointKey) || window.CHAT_AI_ENDPOINT || "";
+}
+
+function getConversationHistory() {
+  return messages.slice(-10).map((message) => ({
+    role: message.userId === botUserId ? "assistant" : "user",
+    content: message.text
+  }));
+}
+
+async function getAiReply(text) {
+  const endpoint = getAiEndpoint();
+  if (!endpoint) return null;
+
+  const aiResponse = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: text,
+      history: getConversationHistory()
+    })
+  });
+
+  const data = await aiResponse.json();
+
+  if (!aiResponse.ok) {
+    throw new Error(data.error || "Erro ao chamar IA.");
+  }
+
+  return data.answer || null;
 }
 
 function normalizeText(text) {
@@ -304,6 +340,13 @@ async function searchWikipedia(text) {
 async function getBotReply(text) {
   const localReply = getLocalBotReply(text);
   if (localReply) return localReply;
+
+  try {
+    const aiReply = await getAiReply(text);
+    if (aiReply) return aiReply;
+  } catch {
+    console.warn("A IA nao respondeu. Usando fallback simples.");
+  }
 
   const contextReply = getContextReply(text);
   if (contextReply) return contextReply;
