@@ -9,10 +9,12 @@ const clearButton = document.querySelector("#clearChat");
 
 const channel = new BroadcastChannel("portfolio-chat");
 const storageKey = "portfolio-chat-messages";
+const contextKey = "portfolio-chat-context";
 const userId = crypto.randomUUID();
 
 let userName = localStorage.getItem("portfolio-chat-name") || "";
 let messages = loadMessages();
+let chatContext = loadContext();
 
 const botUserId = "portfolio-chat-bot";
 const botName = "Assistente";
@@ -23,6 +25,19 @@ function loadMessages() {
   } catch {
     return [];
   }
+}
+
+function loadContext() {
+  try {
+    return JSON.parse(localStorage.getItem(contextKey)) || null;
+  } catch {
+    return null;
+  }
+}
+
+function saveContext(context) {
+  chatContext = context;
+  localStorage.setItem(contextKey, JSON.stringify(context));
 }
 
 function saveMessages() {
@@ -130,6 +145,8 @@ function getKnownAnswer(text) {
   if (/\bquem\s+(descobriu|encontrou|chegou\s+ao?)\s+(o\s+)?brasil\b/.test(normalized)) {
     return {
       title: "Descobrimento do Brasil",
+      subject: "Pedro Alvares Cabral",
+      intent: "discoverer",
       answer: "Pela versao historica mais conhecida, Pedro Alvares Cabral chegou ao Brasil em 22 de abril de 1500, comandando uma expedicao portuguesa.",
       url: "https://pt.wikipedia.org/wiki/Descobrimento_do_Brasil"
     };
@@ -138,12 +155,32 @@ function getKnownAnswer(text) {
   if (/\bquem\s+(inventou|criou)\s+(a\s+)?internet\b/.test(normalized)) {
     return {
       title: "Internet",
+      subject: "Vint Cerf e Bob Kahn",
+      intent: "inventor",
       answer: "A internet nao foi criada por uma unica pessoa. Uma parte essencial da tecnologia foi desenvolvida por Vint Cerf e Bob Kahn, que criaram o protocolo TCP/IP.",
       url: "https://pt.wikipedia.org/wiki/Internet"
     };
   }
 
   return null;
+}
+
+function getContextReply(text) {
+  if (!chatContext) return null;
+
+  const normalized = normalizeText(text);
+  const asksAboutPreviousSubject = /\b(ele|ela|isso|esse|essa|eles|elas)\b/.test(normalized);
+  if (!asksAboutPreviousSubject) return null;
+
+  if (chatContext.intent === "discoverer" && /\b(descobriu|encontrou|chegou)\b/.test(normalized)) {
+    return `Sim. Eu estava falando de ${chatContext.subject}. Pela versao historica mais conhecida, foi ele quem chegou ao Brasil em 22 de abril de 1500.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
+  }
+
+  if (chatContext.intent === "inventor" && /\b(inventou|criou)\b/.test(normalized)) {
+    return `Sim, eu estava falando de ${chatContext.subject}. Esse foi o nome ligado a resposta anterior.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
+  }
+
+  return `Voce esta falando de ${chatContext.title}. Resumo: ${chatContext.answer}\n\nFonte: ${chatContext.url}`;
 }
 
 function buildSearchQuery(text) {
@@ -235,6 +272,8 @@ async function searchWikipedia(text) {
 
   return {
     title: page.title,
+    subject: page.title,
+    intent: "topic",
     extract: trimExtract(page.extract),
     url: page.fullurl
   };
@@ -244,14 +283,25 @@ async function getBotReply(text) {
   const localReply = getLocalBotReply(text);
   if (localReply) return localReply;
 
+  const contextReply = getContextReply(text);
+  if (contextReply) return contextReply;
+
   const knownAnswer = getKnownAnswer(text);
   if (knownAnswer) {
+    saveContext(knownAnswer);
     return `${knownAnswer.answer}\n\nFonte: ${knownAnswer.title} - ${knownAnswer.url}`;
   }
 
   try {
     const result = await searchWikipedia(text);
     if (result) {
+      saveContext({
+        title: result.title,
+        subject: result.subject,
+        intent: result.intent,
+        answer: result.extract,
+        url: result.url
+      });
       return `Encontrei isto sobre ${result.title}:\n\n${result.extract}\n\nFonte: ${result.url}`;
     }
   } catch {
@@ -296,6 +346,8 @@ messageForm.addEventListener("submit", (event) => {
 
 clearButton.addEventListener("click", () => {
   messages = [];
+  chatContext = null;
+  localStorage.removeItem(contextKey);
   saveMessages();
   renderMessages();
   channel.postMessage({ type: "clear" });
