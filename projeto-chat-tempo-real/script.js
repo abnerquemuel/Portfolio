@@ -186,8 +186,16 @@ function getContextReply(text) {
     return `Sim. Eu estava falando de ${chatContext.subject}. Pela versao historica mais conhecida, foi ele quem chegou ao Brasil em 22 de abril de 1500.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
   }
 
+  if (chatContext.intent === "discoverer" && /\b(ano|data|quando)\b/.test(normalized)) {
+    return `Foi em 1500. A chegada da expedicao de Pedro Alvares Cabral ao Brasil aconteceu em 22 de abril de 1500.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
+  }
+
   if (chatContext.intent === "inventor" && /\b(inventou|criou)\b/.test(normalized)) {
     return `Sim, eu estava falando de ${chatContext.subject}. Esse foi o nome ligado a resposta anterior.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
+  }
+
+  if (chatContext.intent === "colonizer" && /\b(ano|data|quando)\b/.test(normalized)) {
+    return `A colonizacao portuguesa do Brasil comecou no seculo XVI, depois da chegada de Pedro Alvares Cabral em 1500.\n\nFonte: ${chatContext.title} - ${chatContext.url}`;
   }
 
   if (chatContext.intent === "colonizer" && /\b(colonizou|colonizava|dominou)\b/.test(normalized)) {
