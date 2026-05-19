@@ -15,7 +15,7 @@ let userName = localStorage.getItem("portfolio-chat-name") || "";
 let messages = loadMessages();
 
 const botUserId = "portfolio-chat-bot";
-const botName = "Bot";
+const botName = "Assistente";
 
 function loadMessages() {
   try {
@@ -82,13 +82,17 @@ function sendMessage(text) {
   scheduleBotReply(text);
 }
 
-function getLocalBotReply(text) {
-  const normalized = text
+function normalizeText(text) {
+  return text
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
+}
 
-  if (normalized.includes("oi") || normalized.includes("ola")) {
+function getLocalBotReply(text) {
+  const normalized = normalizeText(text);
+
+  if (/\b(oi|ola|olá|bom dia|boa tarde|boa noite)\b/.test(normalized)) {
     return `Oi, ${userName}! Como posso ajudar hoje?`;
   }
 
@@ -96,11 +100,20 @@ function getLocalBotReply(text) {
     return "Tudo certo por aqui. E com voce?";
   }
 
-  if (normalized.includes("calculadora")) {
+  if (
+    normalized.includes("meu projeto de calculadora") ||
+    normalized.includes("projeto calculadora") ||
+    normalized.includes("minha calculadora")
+  ) {
     return "A calculadora ja esta no seu portfolio. Ficou um bom primeiro projeto.";
   }
 
-  if (normalized.includes("portfolio")) {
+  if (
+    normalized.includes("meu portfolio") ||
+    normalized.includes("meu portifolio") ||
+    normalized.includes("seu portfolio") ||
+    normalized.includes("seu portifolio")
+  ) {
     return "Seu portfolio esta ganhando projetos bem legais. Continue adicionando exemplos praticos.";
   }
 
@@ -111,21 +124,46 @@ function getLocalBotReply(text) {
   return null;
 }
 
+function buildSearchQuery(text) {
+  return normalizeText(text)
+    .replace(/[?!.,;:()[\]{}"']/g, " ")
+    .replace(/\b(pesquise|pesquisar|procure|procurar|busque|buscar)\b/g, " ")
+    .replace(/\b(me fala sobre|me fale sobre|fale sobre|me diga sobre|explique sobre)\b/g, " ")
+    .replace(/\b(o que e|o que eh|quem e|quem foi|qual e|qual foi|onde fica|quando foi|para que serve|como funciona)\b/g, " ")
+    .replace(/\b(pra mim|para mim|por favor|pfv)\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function trimExtract(extract) {
+  const cleanExtract = extract.replace(/\s+/g, " ").trim();
+
+  if (cleanExtract.length <= 620) {
+    return cleanExtract;
+  }
+
+  return `${cleanExtract.slice(0, 620).replace(/\s+\S*$/, "")}...`;
+}
+
 async function searchWikipedia(text) {
+  const query = buildSearchQuery(text);
+  if (query.length < 3) return null;
+
   const searchUrl = new URL("https://pt.wikipedia.org/w/api.php");
   searchUrl.search = new URLSearchParams({
     action: "query",
     format: "json",
     list: "search",
     origin: "*",
-    srsearch: text
+    srlimit: "5",
+    srsearch: query
   });
 
   const searchResponse = await fetch(searchUrl);
   if (!searchResponse.ok) return null;
 
   const searchData = await searchResponse.json();
-  const title = searchData.query?.search?.[0]?.title;
+  const title = searchData.query?.search?.find((result) => result.title)?.title;
   if (!title) return null;
 
   const summaryUrl = new URL("https://pt.wikipedia.org/w/api.php");
@@ -149,11 +187,11 @@ async function searchWikipedia(text) {
   const page = pages.find((item) => item.extract);
   if (!page) return null;
 
-  const extract = page.extract.length > 520
-    ? `${page.extract.slice(0, 520).replace(/\s+\S*$/, "")}...`
-    : page.extract;
-
-  return `${extract}\n\nFonte: Wikipedia - ${page.fullurl}`;
+  return {
+    title: page.title,
+    extract: trimExtract(page.extract),
+    url: page.fullurl
+  };
 }
 
 async function getBotReply(text) {
@@ -161,13 +199,15 @@ async function getBotReply(text) {
   if (localReply) return localReply;
 
   try {
-    const internetReply = await searchWikipedia(text);
-    if (internetReply) return internetReply;
+    const result = await searchWikipedia(text);
+    if (result) {
+      return `Encontrei isto sobre ${result.title}:\n\n${result.extract}\n\nFonte: ${result.url}`;
+    }
   } catch {
     return "Tentei pesquisar na internet, mas nao consegui buscar a resposta agora.";
   }
 
-  return "Pesquisei, mas nao encontrei uma resposta confiavel para essa pergunta.";
+  return "Pesquisei, mas nao encontrei uma resposta boa para essa pergunta. Tente perguntar com o nome principal do assunto.";
 }
 
 function scheduleBotReply(text) {
