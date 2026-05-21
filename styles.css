@@ -403,6 +403,59 @@ body {
 	transform: rotate(-25deg);
 }
 
+.ecommerce-preview {
+	position: relative;
+	overflow: hidden;
+	background:
+		linear-gradient(135deg, rgba(15, 118, 110, 0.95), rgba(32, 32, 29, 0.92)),
+		#0f766e;
+}
+
+.ecommerce-preview span {
+	position: absolute;
+	left: 22px;
+	top: 23px;
+	width: 72px;
+	height: 42px;
+	border: 3px solid #fff8e7;
+	border-top: 0;
+	border-radius: 0 0 8px 8px;
+}
+
+.ecommerce-preview span::before {
+	content: "";
+	position: absolute;
+	left: 10px;
+	top: -16px;
+	width: 44px;
+	height: 24px;
+	border: 3px solid #fff8e7;
+	border-bottom: 0;
+	border-radius: 999px 999px 0 0;
+}
+
+.ecommerce-preview strong {
+	position: absolute;
+	right: 19px;
+	top: 17px;
+	display: grid;
+	width: 30px;
+	height: 30px;
+	place-items: center;
+	border-radius: 50%;
+	background-color: #FF9B42;
+	box-shadow: 0 12px 0 rgba(255, 255, 255, 0.2);
+}
+
+.ecommerce-preview strong::before {
+	content: "";
+	width: 10px;
+	height: 10px;
+	border-right: 3px solid #20201d;
+	border-bottom: 3px solid #20201d;
+	transform: rotate(45deg) translate(-1px, -2px);
+}
+
 .finance-preview {
 	position: relative;
 	overflow: hidden;

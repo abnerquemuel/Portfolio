@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercato | E-commerce com Carrinho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Mercato">
+        <span class="brand-mark">M</span>
+        <span>Mercato</span>
+      </a>
+
+      <div class="search-box">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="Buscar produtos" autocomplete="off">
+      </div>
+
+      <button class="cart-toggle" id="cartToggle" type="button" aria-label="Abrir carrinho">
+        <span aria-hidden="true">🛒</span>
+        <strong>Carrinho</strong>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Loja virtual simples</p>
+          <h1>E-commerce com carrinho dinâmico e persistência no navegador.</h1>
+          <p>Filtre produtos, adicione ao carrinho, ajuste quantidades e veja os totais mudarem em tempo real.</p>
+        </div>
+        <div class="hero-panel" aria-label="Resumo do carrinho">
+          <span>Total no carrinho</span>
+          <strong id="heroCartTotal">R$ 0,00</strong>
+          <small id="heroCartItems">0 itens selecionados</small>
+        </div>
+      </section>
+
+      <section class="store-layout">
+        <aside class="filters" aria-label="Filtros de produtos">
+          <div>
+            <p class="section-kicker">Categorias</p>
+            <h2>Comprar por tipo</h2>
+          </div>
+          <div class="category-list" id="categoryList"></div>
+        </aside>
+
+        <section class="products-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Produtos</p>
+              <h2 id="productsTitle">Todos os produtos</h2>
+            </div>
+            <span id="productCount"></span>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrinho de compras" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <p class="section-kicker">Seu pedido</p>
+        <h2>Carrinho</h2>
+      </div>
+      <button class="icon-button" id="closeCart" type="button" aria-label="Fechar carrinho">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <strong id="subtotal">R$ 0,00</strong>
+      </div>
+      <div class="summary-row">
+        <span>Frete</span>
+        <strong id="shipping">R$ 0,00</strong>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <strong id="total">R$ 0,00</strong>
+      </div>
+      <button class="checkout-button" id="checkoutButton" type="button">Finalizar compra</button>
+      <button class="clear-cart" id="clearCart" type="button">Limpar carrinho</button>
+    </div>
+  </aside>
+
+  <div class="overlay" id="overlay" hidden></div>
+
+  <template id="productTemplate">
+    <article class="product-card">
+      <img class="product-image" src="" alt="">
+      <div class="product-info">
+        <span class="product-category"></span>
+        <h3></h3>
+        <p></p>
+        <div class="product-footer">
+          <strong></strong>
+          <button type="button">Adicionar</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
