@@ -104,7 +104,10 @@ body::-webkit-scrollbar {
 .profile-pic img {
 
 	width: 350px;
-	border-radius: 350px;
+	height: 350px;
+	object-fit: cover;
+	object-position: center 28%;
+	border-radius: 50%;
 	margin-top: 100px;
 }
 
@@ -603,6 +606,7 @@ body {
 
 	margin-top: 20px;
 	width: min(240px, 78vw);
+	height: min(240px, 78vw);
 	max-width: 100%;
 }
 
