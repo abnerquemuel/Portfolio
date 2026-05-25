@@ -67,31 +67,49 @@
 </div>
 
 </div>
-<section class="ai-showcase" aria-labelledby="ai-title">
-    <div class="ai-copy">
-        <span class="ai-kicker">IA no portfolio</span>
-        <h2 id="ai-title">Converse com meu assistente</h2>
-        <p>Um resumo inteligente para recrutadores conhecerem meus projetos, minhas habilidades e meu perfil profissional em poucos cliques.</p>
+<section class="ai-lab" aria-labelledby="ai-lab-title">
+    <div class="ai-lab-copy">
+        <span class="ai-lab-kicker">Modo IA</span>
+        <h2 id="ai-lab-title">Analise IA do Perfil</h2>
+        <p>Uma experiencia interativa que transforma meu portfolio em um diagnostico rapido de habilidades, projetos e potencial para vaga junior.</p>
+        <button class="ai-scan-button" id="runAiScan" type="button">Gerar analise</button>
+        <small id="aiScanStatus">Aguardando comando para iniciar leitura do perfil.</small>
     </div>
 
-    <div class="ai-panel">
-        <div class="ai-panel-header">
-            <div>
-                <span>Assistente IA</span>
-                <strong>Abner.dev</strong>
+    <div class="ai-lab-panel" aria-label="Painel de analise IA do perfil">
+        <div class="ai-lab-topbar">
+            <span>Abner.profile</span>
+            <strong id="aiScore">00%</strong>
+        </div>
+
+        <div class="ai-scan-stage" aria-hidden="true">
+            <div class="ai-scan-frame">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <small>online</small>
+            <p>Escaneando portfolio</p>
         </div>
 
-        <div class="ai-chat" id="aiChat" aria-live="polite">
-            <p class="ai-message bot">Ola! Posso explicar os projetos do Abner, resumir o curriculo ou indicar os pontos fortes dele para uma vaga junior.</p>
+        <div class="ai-metrics">
+            <div class="ai-metric" style="--target: 88%">
+                <span>Projetos praticos</span>
+                <div><i></i></div>
+            </div>
+            <div class="ai-metric" style="--target: 82%">
+                <span>Logica com JavaScript</span>
+                <div><i></i></div>
+            </div>
+            <div class="ai-metric" style="--target: 78%">
+                <span>Interface e responsividade</span>
+                <div><i></i></div>
+            </div>
         </div>
 
-        <div class="ai-prompts" aria-label="Perguntas rapidas para o assistente">
-            <button type="button" data-ai-question="projetos">Projetos principais</button>
-            <button type="button" data-ai-question="curriculo">Resumo do curriculo</button>
-            <button type="button" data-ai-question="vaga">Perfil para vaga junior</button>
-            <button type="button" data-ai-question="tecnologias">Tecnologias</button>
+        <div class="ai-insights">
+            <p data-scan-item>Perfil detectado: desenvolvedor em formacao com foco em projetos reais.</p>
+            <p data-scan-item>Destaque: portfolio com calculadora, chat, Snake e e-commerce.</p>
+            <p data-scan-item>Leitura da IA: boa iniciativa, pratica constante e evolucao visivel.</p>
         </div>
     </div>
 </section>

@@ -16,45 +16,69 @@ function openNav() {
     }
 
 }
-function setupAiAssistant() {
-    var chat = document.getElementById("aiChat");
-    var buttons = document.querySelectorAll("[data-ai-question]");
+function setupAiProfileScan() {
+    var section = document.querySelector(".ai-lab");
+    var button = document.getElementById("runAiScan");
+    var status = document.getElementById("aiScanStatus");
+    var score = document.getElementById("aiScore");
+    var items = document.querySelectorAll("[data-scan-item]");
 
-    if (!chat || buttons.length === 0) {
+    if (!section || !button || !status || !score) {
         return;
     }
 
-    var answers = {
-        projetos: "Os projetos principais mostram logica, interface e produto: calculadora, chat em tempo real, Snake e e-commerce com carrinho. Eles ajudam a provar que o Abner pratica tanto JavaScript quanto experiencia visual.",
-        curriculo: "Abner Quemuel e um desenvolvedor em formacao, focado em construir projetos praticos, evoluir em front-end e transformar ideias em paginas e ferramentas funcionais.",
-        vaga: "Para uma vaga junior, o ponto forte e ter portfolio vivo: projetos publicados, codigo evoluindo e vontade de aprender rapido. Isso mostra iniciativa alem do curriculo.",
-        tecnologias: "O portfolio usa HTML, CSS e JavaScript. Os projetos tambem reforcam manipulacao de DOM, responsividade, organizacao visual e interacao com o usuario."
-    };
-
-    var labels = {
-        projetos: "Quais sao os projetos principais?",
-        curriculo: "Resuma meu curriculo",
-        vaga: "Sirvo para vaga junior?",
-        tecnologias: "Quais tecnologias eu uso?"
-    };
-
-    function addMessage(text, type) {
-        var message = document.createElement("p");
-        message.className = "ai-message " + type;
-        message.innerText = text;
-        chat.appendChild(message);
-        chat.scrollTop = chat.scrollHeight;
+    function setStatus(text, delay) {
+        window.setTimeout(function() {
+            status.innerText = text;
+        }, delay);
     }
 
-    buttons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            var key = button.getAttribute("data-ai-question");
-            addMessage(labels[key], "user");
-            window.setTimeout(function() {
-                addMessage(answers[key], "bot");
-            }, 350);
+    function animateScore(target) {
+        var current = 0;
+        var timer = window.setInterval(function() {
+            current += 4;
+            if (current >= target) {
+                current = target;
+                window.clearInterval(timer);
+            }
+            score.innerText = current.toString().padStart(2, "0") + "%";
+        }, 38);
+    }
+
+    function runScan() {
+        section.classList.remove("is-scanned");
+        button.disabled = true;
+        button.innerText = "Analisando...";
+        score.innerText = "00%";
+
+        items.forEach(function(item) {
+            item.classList.remove("is-visible");
         });
-    });
+
+        setStatus("Lendo projetos publicados...", 0);
+        setStatus("Cruzando habilidades com perfil junior...", 650);
+        setStatus("Gerando resumo de potencial profissional...", 1300);
+
+        window.setTimeout(function() {
+            section.classList.add("is-scanned");
+            animateScore(88);
+        }, 900);
+
+        items.forEach(function(item, index) {
+            window.setTimeout(function() {
+                item.classList.add("is-visible");
+            }, 1350 + index * 420);
+        });
+
+        window.setTimeout(function() {
+            status.innerText = "Analise pronta: portfolio com boa iniciativa, projetos praticos e evolucao visivel.";
+            button.disabled = false;
+            button.innerText = "Gerar novamente";
+        }, 2800);
+    }
+
+    button.addEventListener("click", runScan);
+    window.setTimeout(runScan, 700);
 }
 
-document.addEventListener("DOMContentLoaded", setupAiAssistant);
+document.addEventListener("DOMContentLoaded", setupAiProfileScan);
