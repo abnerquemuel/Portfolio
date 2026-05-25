@@ -679,6 +679,78 @@ body::after {
 .shortcut-linkedin { --shortcut-bg: linear-gradient(135deg, #0a66c2, #1a314f); }
 .shortcut-contact { --shortcut-bg: linear-gradient(135deg, #0f766e, #20201d); }
 
+
+.share-hub {
+	max-width: 1080px;
+	margin: -46px auto 86px;
+	padding: 28px 24px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: 8px;
+	background:
+		linear-gradient(135deg, rgba(255, 155, 66, 0.12), transparent 34%),
+		rgba(36, 36, 36, 0.82);
+	box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+	animation-name: conteudo;
+	animation-duration: 3s;
+}
+
+.share-hub h2 {
+	margin: 0;
+	color: white;
+	font-size: clamp(28px, 4vw, 42px);
+	font-weight: 600;
+	line-height: 1.05;
+}
+
+.share-hub p {
+	margin: 18px 0 22px;
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 1.4;
+}
+
+.share-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.share-buttons a {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 50px;
+	padding: 0 18px;
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	border-radius: 999px;
+	color: white;
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: none;
+	overflow: hidden;
+	transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.share-buttons a::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(120deg, transparent 28%, rgba(255, 255, 255, 0.2), transparent 72%);
+	transform: translateX(-135%);
+	transition: transform 0.55s ease;
+}
+
+.share-buttons a:hover {
+	border-color: rgba(255, 155, 66, 0.72);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+	transform: translateY(-3px);
+}
+
+.share-buttons a:hover::before {
+	transform: translateX(135%);
+}
 .project-card {
 	position: relative;
 	box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
@@ -817,6 +889,19 @@ body::after {
 
 	width: 48px;
 	height: 48px;
+}
+
+.share-hub {
+	margin: 36px 18px 50px;
+	padding: 22px 18px;
+}
+
+.share-hub p {
+	font-size: 17px;
+}
+
+.share-buttons a {
+	width: 100%;
 }
 
 
