@@ -603,11 +603,11 @@ body::after {
 }
 
 .home-shortcuts {
-	max-width: 1080px;
+	max-width: 900px;
 	margin: -74px auto 78px;
 	padding: 0 32px;
 	display: grid;
-	grid-template-columns: repeat(2, minmax(260px, 1fr));
+	grid-template-columns: repeat(2, minmax(220px, 1fr));
 	gap: 16px;
 	animation-name: conteudo;
 	animation-duration: 3s;
@@ -616,22 +616,22 @@ body::after {
 .shortcut-card {
 	position: relative;
 	display: inline-flex;
-	min-height: 64px;
+	min-height: 54px;
 	align-items: center;
 	justify-content: center;
-	padding: 0 26px;
+	padding: 0 22px;
 	border: 1px solid rgba(255, 255, 255, 0.46);
 	border-radius: 999px;
 	background: var(--shortcut-bg);
 	color: white;
-	font-size: clamp(26px, 3.2vw, 36px);
+	font-size: clamp(21px, 2.6vw, 30px);
 	font-weight: 600;
 	line-height: 1;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 	overflow: hidden;
-	box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24), 0 0 26px var(--shortcut-glow);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22), 0 0 20px var(--shortcut-glow);
 }
 
 .shortcut-card::before {
@@ -646,7 +646,7 @@ body::after {
 .shortcut-card:hover {
 	border-color: rgba(255, 255, 255, 0.75);
 	transform: translateY(-5px);
-	box-shadow: 0 24px 58px rgba(0, 0, 0, 0.32), 0 0 34px var(--shortcut-glow);
+	box-shadow: 0 20px 46px rgba(0, 0, 0, 0.3), 0 0 26px var(--shortcut-glow);
 }
 
 .shortcut-card:hover::before {
@@ -885,14 +885,14 @@ body::after {
 
 
 .home-shortcuts {
-	margin: 40px auto 54px;
+	margin: 34px auto 46px;
 	padding: 0 18px;
 	grid-template-columns: 1fr;
 }
 
 .shortcut-card {
-	min-height: 58px;
-	font-size: clamp(22px, 8vw, 30px);
+	min-height: 50px;
+	font-size: clamp(19px, 7vw, 26px);
 }
 .main {
 
