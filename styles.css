@@ -765,6 +765,229 @@ body::after {
 	background: #FF9B42;
 	transform: translateY(-2px);
 }
+
+/* CERTIFICADOS */
+
+.certificate-home-card {
+	position: relative;
+	display: flex;
+	min-height: 136px;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 8px;
+	grid-column: 1 / -1;
+	border: 1px solid rgba(168, 85, 247, 0.5);
+	border-radius: 8px;
+	background:
+		radial-gradient(circle at center, rgba(124, 58, 237, 0.38), transparent 62%),
+		linear-gradient(135deg, rgba(49, 27, 105, 0.95), rgba(18, 15, 38, 0.96));
+	color: white;
+	text-decoration: none;
+	overflow: hidden;
+	box-shadow: 0 18px 46px rgba(0, 0, 0, 0.26), 0 0 32px rgba(124, 58, 237, 0.25);
+	transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.certificate-home-card::before,
+.certificate-home-card::after {
+	content: "";
+	position: absolute;
+	border-radius: 50%;
+	border: 2px solid rgba(168, 85, 247, 0.22);
+	pointer-events: none;
+}
+
+.certificate-home-card::before {
+	width: 140px;
+	height: 140px;
+}
+
+.certificate-home-card::after {
+	width: 200px;
+	height: 200px;
+}
+
+.certificate-home-card:hover {
+	border-color: rgba(216, 180, 254, 0.82);
+	box-shadow: 0 24px 58px rgba(0, 0, 0, 0.32), 0 0 40px rgba(168, 85, 247, 0.34);
+	transform: translateY(-5px);
+}
+
+.cap-orbit {
+	position: relative;
+	z-index: 1;
+	width: 170px;
+	height: 82px;
+	animation: cap-bounce 1.7s ease-in-out infinite;
+}
+
+.grad-cap {
+	position: absolute;
+	left: 22px;
+	top: 22px;
+	width: 78px;
+	height: 44px;
+	background: linear-gradient(135deg, #0f172a, #1f2937 55%, #f59e0b 56%, #111827 62%);
+	clip-path: polygon(50% 0, 100% 28%, 50% 58%, 0 28%);
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.35));
+	transform: rotate(-13deg);
+}
+
+.grad-cap::before {
+	content: "";
+	position: absolute;
+	left: 30px;
+	top: 31px;
+	width: 22px;
+	height: 18px;
+	border-radius: 0 0 6px 6px;
+	background: #111827;
+}
+
+.grad-cap::after {
+	content: "";
+	position: absolute;
+	left: 67px;
+	top: 22px;
+	width: 3px;
+	height: 38px;
+	background: #f97316;
+	transform: rotate(14deg);
+	transform-origin: top;
+}
+
+.grad-cap b {
+	position: absolute;
+	left: 67px;
+	top: 55px;
+	width: 8px;
+	height: 18px;
+	border-radius: 999px;
+	background: #fb923c;
+}
+
+.diploma-roll {
+	position: absolute;
+	right: 22px;
+	top: 38px;
+	width: 58px;
+	height: 19px;
+	border-radius: 999px;
+	background: linear-gradient(90deg, #fff7ed, #ffffff 60%, #fde68a);
+	box-shadow: 0 8px 14px rgba(0, 0, 0, 0.24);
+	transform: rotate(-17deg);
+}
+
+.diploma-roll::before,
+.diploma-roll::after {
+	content: "";
+	position: absolute;
+	top: -4px;
+	width: 9px;
+	height: 27px;
+	border-radius: 999px;
+	background: #fff7ed;
+}
+
+.diploma-roll::before {
+	left: -2px;
+}
+
+.diploma-roll::after {
+	right: -2px;
+}
+
+.certificate-home-card strong {
+	position: relative;
+	z-index: 1;
+	font-size: 24px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.cert-intro {
+	max-width: 760px;
+	margin-bottom: 28px;
+}
+
+.certificate-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+	gap: 18px;
+	margin-top: 28px;
+}
+
+.certificate-card {
+	position: relative;
+	min-height: 230px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: 8px;
+	background:
+		linear-gradient(135deg, rgba(255, 155, 66, 0.1), transparent 36%),
+		rgba(52, 52, 52, 0.88);
+	color: white;
+	overflow: hidden;
+	box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+}
+
+.certificate-card::before {
+	content: "";
+	position: absolute;
+	right: -42px;
+	top: -42px;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	background: rgba(255, 155, 66, 0.12);
+}
+
+.featured-certificate {
+	border-color: rgba(255, 155, 66, 0.46);
+}
+
+.certificate-seal {
+	display: grid;
+	width: 54px;
+	height: 54px;
+	margin-bottom: 18px;
+	place-items: center;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #f27609, #7c3aed);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.certificate-card span {
+	color: #FF9B42;
+	font-size: 12px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.certificate-card h2 {
+	margin: 10px 0 12px;
+	color: white;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 1.12;
+	text-transform: none;
+}
+
+.certificate-card p {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.78);
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 1.45;
+	text-align: left;
+}
+
+@keyframes cap-bounce {
+	0%, 100% { transform: translateY(0) rotate(-1deg); }
+	50% { transform: translateY(-14px) rotate(2deg); }
+}
 @keyframes profile-capa {
 	0% {opacity: 0; transform: translate(0px,20px)}
 	100% {opacity: 1; transform: translate(0px,0px)}
