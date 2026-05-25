@@ -2,117 +2,125 @@
 <html>
 
 <head>
-    <title>Abner Quemuel Dos Reis Santos - Portfolio Online</title>
+    <title>Abner Quemuel - Portfolio Online</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="styles.css">
-
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400" rel="stylesheet">
 
     <script type="text/javascript" src="js/scripts.js"></script>
 </head>
 
-<body>
+<body class="home-page">
 
     <div id="navigation" class="navigation">
-
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="contato.html">Contato</a></li>
             <li><a href="curriculo.html">Curriculo</a></li>
-           <li class="threeline-icon">
-
-    <a href="javascript:void(0)" onclick="openNav()">
-
-        <span id="icon-menu">☰</span>
-
-    </a>
-
-</li>
+            <li class="threeline-icon">
+                <a href="javascript:void(0)" onclick="openNav()">
+                    <span id="icon-menu">☰</span>
+                </a>
+            </li>
         </ul>
-
     </div>
 
-    <div class="capa">
-
-        <div class="profile-pic">
-
-           <img src="img/fotoabner001.jpg" alt="Foto de Abner Quemuel">
-
-        </div>
-
-       <div class="profile-title">
-
-    <h1>Abner <span>Quemuel</span></h1>
-
-    <h2>
-        Desenvolvedor em formação - Transformando ideias em projetos
-    </h2>
-
-   <div class="social-container">
-
-    <a href="https://www.linkedin.com/in/abnerquemuel" target="_blank">
-
-        <img class="social-icon"
-        src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-        alt="LinkedIn">
-
-    </a>
-
-</div>
-
-</div>
-
-</div>
-<section class="ai-lab" aria-labelledby="ai-lab-title">
-    <div class="ai-lab-copy">
-        <span class="ai-lab-kicker">Modo IA</span>
-        <h2 id="ai-lab-title">Analise IA do Perfil</h2>
-        <p>Uma experiencia interativa que transforma meu portfolio em um diagnostico rapido de habilidades, projetos e potencial para vaga junior.</p>
-        <button class="ai-scan-button" id="runAiScan" type="button">Gerar analise</button>
-        <small id="aiScanStatus">Aguardando comando para iniciar leitura do perfil.</small>
-    </div>
-
-    <div class="ai-lab-panel" aria-label="Painel de analise IA do perfil">
-        <div class="ai-lab-topbar">
-            <span>Abner.profile</span>
-            <strong id="aiScore">00%</strong>
-        </div>
-
-        <div class="ai-scan-stage" aria-hidden="true">
-            <div class="ai-scan-frame">
-                <span></span>
-                <span></span>
-                <span></span>
+    <main class="home-shell">
+        <section class="home-hero" aria-labelledby="home-title">
+            <div class="home-hero-photo">
+                <img src="img/fotoabner001.jpg" alt="Foto de Abner Quemuel">
+                <span>Disponivel para oportunidades junior</span>
             </div>
-            <p>Escaneando portfolio</p>
-        </div>
 
-        <div class="ai-metrics">
-            <div class="ai-metric" style="--target: 88%">
-                <span>Projetos praticos</span>
-                <div><i></i></div>
-            </div>
-            <div class="ai-metric" style="--target: 82%">
-                <span>Logica com JavaScript</span>
-                <div><i></i></div>
-            </div>
-            <div class="ai-metric" style="--target: 78%">
-                <span>Interface e responsividade</span>
-                <div><i></i></div>
-            </div>
-        </div>
+            <div class="home-hero-content">
+                <p class="home-eyebrow">Portfolio de desenvolvimento web</p>
+                <h1 id="home-title">Abner <span>Quemuel</span></h1>
+                <p class="home-intro">Desenvolvedor em formacao criando projetos web com HTML, CSS, JavaScript e muita vontade de evoluir.</p>
 
-        <div class="ai-insights">
-            <p data-scan-item>Perfil detectado: desenvolvedor em formacao com foco em projetos reais.</p>
-            <p data-scan-item>Destaque: portfolio com calculadora, chat, Snake e e-commerce.</p>
-            <p data-scan-item>Leitura da IA: boa iniciativa, pratica constante e evolucao visivel.</p>
-        </div>
-    </div>
-</section>
+                <div class="home-actions" aria-label="Acoes principais">
+                    <a class="home-action-card primary" href="portfolio.html">
+                        <small>01</small>
+                        <strong>Ver portfolio</strong>
+                        <span>Projetos praticos, jogos e interfaces web.</span>
+                    </a>
+
+                    <a class="home-action-card" href="curriculo.html">
+                        <small>02</small>
+                        <strong>Ver curriculo</strong>
+                        <span>Formacao, habilidades e perfil profissional.</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-highlight" aria-label="Resumo do perfil">
+            <div>
+                <span>Analise rapida</span>
+                <strong>Perfil com iniciativa alta</strong>
+                <p>Projetos publicados, pratica constante e foco em construir experiencias reais para o navegador.</p>
+            </div>
+            <div>
+                <span>Stack atual</span>
+                <strong>HTML + CSS + JavaScript</strong>
+                <p>Base front-end aplicada em calculadora, chat, Snake, e-commerce e agente financeiro.</p>
+            </div>
+            <div>
+                <span>Objetivo</span>
+                <strong>Vaga junior</strong>
+                <p>Aprender em time, melhorar codigo e transformar ideias em produtos cada vez melhores.</p>
+            </div>
+        </section>
+
+        <section class="home-projects" aria-labelledby="featured-title">
+            <div class="home-section-title">
+                <p>Projetos em destaque</p>
+                <h2 id="featured-title">Escolha uma experiencia</h2>
+            </div>
+
+            <div class="home-project-grid">
+                <a href="projeto-ecommerce-carrinho/index.html" target="_blank" class="home-project-card ecommerce-home">
+                    <span>E-commerce</span>
+                    <strong>Carrinho interativo</strong>
+                    <small>Filtros, quantidades e Local Storage</small>
+                </a>
+
+                <a href="projeto-chat-tempo-real/index.html" target="_blank" class="home-project-card chat-home">
+                    <span>Chat</span>
+                    <strong>Conversa em tempo real</strong>
+                    <small>Interface de mensagens e interacao</small>
+                </a>
+
+                <a href="projeto-snake/index.html" target="_blank" class="home-project-card snake-home">
+                    <span>Snake</span>
+                    <strong>Jogo no navegador</strong>
+                    <small>Logica, colisao e placar</small>
+                </a>
+
+                <a href="https://abnerquemuel.github.io/agente-financeiro/" target="_blank" class="home-project-card finance-home">
+                    <span>IA financeira</span>
+                    <strong>Agente Financeiro</strong>
+                    <small>Metas, gastos e painel inteligente</small>
+                </a>
+            </div>
+        </section>
+
+        <section class="home-contact-band" aria-label="Contato e redes">
+            <div>
+                <p>Vamos construir algo?</p>
+                <strong>Estou pronto para aprender, colaborar e evoluir.</strong>
+            </div>
+            <div class="home-contact-links">
+                <a href="contato.html">Contato</a>
+                <a href="https://www.linkedin.com/in/abnerquemuel" target="_blank">LinkedIn</a>
+                <a href="portfolio.html">Todos os projetos</a>
+            </div>
+        </section>
+    </main>
+
 </body>
 
 </html>
