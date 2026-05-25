@@ -1,126 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
-    <title>Abner Quemuel - Portfolio Online</title>
+    <title>Bio // Abner Quemuel</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hub profissional de Abner Quemuel com portfolio, curriculo, projetos em destaque e canais de contato.">
 
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="js/scripts.js"></script>
 </head>
 
-<body class="home-page">
+<body class="bio-home-page">
+    <div class="bio-glow" aria-hidden="true"></div>
+    <div class="bio-grid-bg" aria-hidden="true"></div>
 
-    <div id="navigation" class="navigation">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="contato.html">Contato</a></li>
-            <li><a href="curriculo.html">Curriculo</a></li>
-            <li class="threeline-icon">
-                <a href="javascript:void(0)" onclick="openNav()">
-                    <span id="icon-menu">☰</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <main class="home-shell">
-        <section class="home-hero" aria-labelledby="home-title">
-            <div class="home-hero-photo">
-                <img src="img/fotoabner001.jpg" alt="Foto de Abner Quemuel">
-                <span>Disponivel para oportunidades junior</span>
+    <main class="bio-shell">
+        <header class="bio-hero">
+            <div class="bio-profile-scene">
+                <img class="bio-profile" src="img/fotoabner001.jpg" alt="Foto de Abner Quemuel">
             </div>
 
-            <div class="home-hero-content">
-                <p class="home-eyebrow">Portfolio de desenvolvimento web</p>
-                <h1 id="home-title">Abner <span>Quemuel</span></h1>
-                <p class="home-intro">Desenvolvedor em formacao criando projetos web com HTML, CSS, JavaScript e muita vontade de evoluir.</p>
+            <p class="bio-title">Abner Quemuel</p>
+            <h1>Desenvolvedor em formacao</h1>
+            <p class="bio-role">HTML - CSS - JavaScript - Projetos Web</p>
 
-                <div class="home-actions" aria-label="Acoes principais">
-                    <a class="home-action-card primary" href="portfolio.html">
-                        <small>01</small>
-                        <strong>Ver portfolio</strong>
-                        <span>Projetos praticos, jogos e interfaces web.</span>
-                    </a>
+            <a class="bio-cv-button" href="curriculo.html">Ver curriculo</a>
+        </header>
 
-                    <a class="home-action-card" href="curriculo.html">
-                        <small>02</small>
-                        <strong>Ver curriculo</strong>
-                        <span>Formacao, habilidades e perfil profissional.</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="home-highlight" aria-label="Resumo do perfil">
-            <div>
-                <span>Analise rapida</span>
-                <strong>Perfil com iniciativa alta</strong>
-                <p>Projetos publicados, pratica constante e foco em construir experiencias reais para o navegador.</p>
-            </div>
-            <div>
-                <span>Stack atual</span>
-                <strong>HTML + CSS + JavaScript</strong>
-                <p>Base front-end aplicada em calculadora, chat, Snake, e-commerce e agente financeiro.</p>
-            </div>
-            <div>
-                <span>Objetivo</span>
-                <strong>Vaga junior</strong>
-                <p>Aprender em time, melhorar codigo e transformar ideias em produtos cada vez melhores.</p>
-            </div>
-        </section>
-
-        <section class="home-projects" aria-labelledby="featured-title">
-            <div class="home-section-title">
-                <p>Projetos em destaque</p>
-                <h2 id="featured-title">Escolha uma experiencia</h2>
+        <section class="bio-links-section" aria-labelledby="bio-featured-title">
+            <div class="bio-section-heading">
+                <h2 id="bio-featured-title">Portfolio e projetos</h2>
+                <p>Meus principais caminhos para voce conhecer meu trabalho, minha evolucao e meus projetos publicados.</p>
             </div>
 
-            <div class="home-project-grid">
-                <a href="projeto-ecommerce-carrinho/index.html" target="_blank" class="home-project-card ecommerce-home">
-                    <span>E-commerce</span>
-                    <strong>Carrinho interativo</strong>
-                    <small>Filtros, quantidades e Local Storage</small>
+            <div class="bio-links-grid">
+                <a class="bio-link-card card-portfolio" href="portfolio.html">
+                    <span class="bio-card-icon">P</span>
+                    <div>
+                        <small>Destaque</small>
+                        <h3>Portfolio completo</h3>
+                        <p>Veja todos os projetos reunidos em uma unica pagina.</p>
+                    </div>
                 </a>
 
-                <a href="projeto-chat-tempo-real/index.html" target="_blank" class="home-project-card chat-home">
-                    <span>Chat</span>
-                    <strong>Conversa em tempo real</strong>
-                    <small>Interface de mensagens e interacao</small>
+                <a class="bio-link-card card-finance" href="https://abnerquemuel.github.io/agente-financeiro/" target="_blank">
+                    <span class="bio-card-icon">IA</span>
+                    <div>
+                        <small>Projeto com IA</small>
+                        <h3>Agente Financeiro</h3>
+                        <p>Controle financeiro com metas, login e painel inteligente.</p>
+                    </div>
                 </a>
 
-                <a href="projeto-snake/index.html" target="_blank" class="home-project-card snake-home">
-                    <span>Snake</span>
-                    <strong>Jogo no navegador</strong>
-                    <small>Logica, colisao e placar</small>
+                <a class="bio-link-card card-ecommerce" href="projeto-ecommerce-carrinho/index.html" target="_blank">
+                    <span class="bio-card-icon">$</span>
+                    <div>
+                        <small>Front-end</small>
+                        <h3>E-commerce</h3>
+                        <p>Carrinho, filtros, quantidades e Local Storage.</p>
+                    </div>
                 </a>
 
-                <a href="https://abnerquemuel.github.io/agente-financeiro/" target="_blank" class="home-project-card finance-home">
-                    <span>IA financeira</span>
-                    <strong>Agente Financeiro</strong>
-                    <small>Metas, gastos e painel inteligente</small>
+                <a class="bio-link-card card-chat" href="projeto-chat-tempo-real/index.html" target="_blank">
+                    <span class="bio-card-icon">C</span>
+                    <div>
+                        <small>Interface</small>
+                        <h3>Chat em tempo real</h3>
+                        <p>Experiencia de conversa com layout moderno.</p>
+                    </div>
                 </a>
             </div>
         </section>
 
-        <section class="home-contact-band" aria-label="Contato e redes">
-            <div>
-                <p>Vamos construir algo?</p>
-                <strong>Estou pronto para aprender, colaborar e evoluir.</strong>
+        <section class="bio-links-section" aria-labelledby="bio-social-title">
+            <div class="bio-section-heading">
+                <h2 id="bio-social-title">Contato profissional</h2>
+                <p>Canais para conversar comigo, acompanhar minha jornada e acessar minhas informacoes profissionais.</p>
             </div>
-            <div class="home-contact-links">
-                <a href="contato.html">Contato</a>
-                <a href="https://www.linkedin.com/in/abnerquemuel" target="_blank">LinkedIn</a>
-                <a href="portfolio.html">Todos os projetos</a>
+
+            <div class="bio-links-grid compact">
+                <a class="bio-link-card card-cv" href="curriculo.html">
+                    <span class="bio-card-icon">CV</span>
+                    <div>
+                        <small>Curriculo</small>
+                        <h3>Perfil profissional</h3>
+                        <p>Formacao, habilidades e objetivos.</p>
+                    </div>
+                </a>
+
+                <a class="bio-link-card card-linkedin" href="https://www.linkedin.com/in/abnerquemuel" target="_blank">
+                    <span class="bio-card-icon">in</span>
+                    <div>
+                        <small>Rede</small>
+                        <h3>LinkedIn</h3>
+                        <p>Conecte-se comigo profissionalmente.</p>
+                    </div>
+                </a>
+
+                <a class="bio-link-card card-contact" href="contato.html">
+                    <span class="bio-card-icon">@</span>
+                    <div>
+                        <small>Contato</small>
+                        <h3>Fale comigo</h3>
+                        <p>Envie uma mensagem ou proposta.</p>
+                    </div>
+                </a>
             </div>
         </section>
     </main>
-
 </body>
 
 </html>
