@@ -604,10 +604,10 @@ body::after {
 
 .home-shortcuts {
 	max-width: 1080px;
-	margin: -84px auto 84px;
+	margin: -74px auto 78px;
 	padding: 0 32px;
 	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-columns: repeat(2, minmax(260px, 1fr));
 	gap: 16px;
 	animation-name: conteudo;
 	animation-duration: 3s;
@@ -615,69 +615,48 @@ body::after {
 
 .shortcut-card {
 	position: relative;
-	min-height: 146px;
-	padding: 18px;
-	border: 1px solid rgba(255, 255, 255, 0.14);
-	border-radius: 8px;
+	display: inline-flex;
+	min-height: 64px;
+	align-items: center;
+	justify-content: center;
+	padding: 0 26px;
+	border: 1px solid rgba(255, 255, 255, 0.46);
+	border-radius: 999px;
 	background: var(--shortcut-bg);
 	color: white;
+	font-size: clamp(26px, 3.2vw, 36px);
+	font-weight: 600;
+	line-height: 1;
+	text-align: center;
 	text-decoration: none;
+	text-transform: uppercase;
 	overflow: hidden;
-	box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+	box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24), 0 0 26px var(--shortcut-glow);
 }
 
 .shortcut-card::before {
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(120deg, transparent 32%, rgba(255, 255, 255, 0.26), transparent 68%);
+	background: linear-gradient(120deg, transparent 28%, rgba(255, 255, 255, 0.36), transparent 72%);
 	transform: translateX(-145%);
 	transition: transform 0.55s ease;
 }
 
 .shortcut-card:hover {
-	border-color: rgba(255, 155, 66, 0.72);
-	transform: translateY(-6px);
-	box-shadow: 0 24px 62px rgba(0, 0, 0, 0.3);
+	border-color: rgba(255, 255, 255, 0.75);
+	transform: translateY(-5px);
+	box-shadow: 0 24px 58px rgba(0, 0, 0, 0.32), 0 0 34px var(--shortcut-glow);
 }
 
 .shortcut-card:hover::before {
 	transform: translateX(145%);
 }
 
-.shortcut-card small,
-.shortcut-card strong,
-.shortcut-card span {
-	position: relative;
-	z-index: 1;
-	display: block;
-}
-
-.shortcut-card small {
-	margin-bottom: 18px;
-	color: rgba(255, 255, 255, 0.72);
-	font-size: 12px;
-	font-weight: 500;
-}
-
-.shortcut-card strong {
-	margin-bottom: 9px;
-	font-size: 24px;
-	font-weight: 500;
-	line-height: 1.05;
-}
-
-.shortcut-card span {
-	color: rgba(255, 255, 255, 0.82);
-	font-size: 14px;
-	font-weight: 300;
-	line-height: 1.4;
-}
-
-.shortcut-portfolio { --shortcut-bg: linear-gradient(135deg, #f27609, #543014); }
-.shortcut-cv { --shortcut-bg: linear-gradient(135deg, #343434, #151515); }
-.shortcut-linkedin { --shortcut-bg: linear-gradient(135deg, #0a66c2, #1a314f); }
-.shortcut-contact { --shortcut-bg: linear-gradient(135deg, #0f766e, #20201d); }
+.shortcut-portfolio { --shortcut-bg: linear-gradient(90deg, #ec4899, #7c3aed 48%, #2563eb); --shortcut-glow: rgba(124, 58, 237, 0.42); }
+.shortcut-cv { --shortcut-bg: linear-gradient(90deg, #f59e0b, #f97316 44%, #e11d48); --shortcut-glow: rgba(249, 115, 22, 0.42); }
+.shortcut-linkedin { --shortcut-bg: linear-gradient(90deg, #06b6d4, #2563eb 52%, #4338ca); --shortcut-glow: rgba(37, 99, 235, 0.42); }
+.shortcut-contact { --shortcut-bg: linear-gradient(90deg, #10b981, #0f766e 52%, #14532d); --shortcut-glow: rgba(16, 185, 129, 0.42); }
 
 
 .share-hub {
@@ -906,21 +885,15 @@ body::after {
 
 
 .home-shortcuts {
-	margin: 40px auto 50px;
+	margin: 40px auto 54px;
 	padding: 0 18px;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 14px;
+	grid-template-columns: 1fr;
 }
 
 .shortcut-card {
-	min-height: 128px;
-	padding: 14px;
+	min-height: 58px;
+	font-size: clamp(22px, 8vw, 30px);
 }
-
-.shortcut-card strong {
-	font-size: 20px;
-}
-
 .main {
 
 	padding-top: 18px;
