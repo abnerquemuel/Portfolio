@@ -834,8 +834,8 @@ body {
 }
 
 .bio-profile-scene::before {
-	width: 198px;
-	height: 198px;
+	width: 260px;
+	height: 260px;
 	border: 1px solid rgba(126, 231, 135, 0.42);
 	box-shadow:
 		0 0 0 16px rgba(126, 231, 135, 0.04),
@@ -843,8 +843,8 @@ body {
 }
 
 .bio-profile-scene::after {
-	width: 172px;
-	height: 172px;
+	width: 228px;
+	height: 228px;
 	background:
 		linear-gradient(90deg, transparent 48%, rgba(126, 231, 135, 0.55) 49%, rgba(126, 231, 135, 0.55) 51%, transparent 52%),
 		linear-gradient(0deg, transparent 48%, rgba(126, 231, 135, 0.55) 49%, rgba(126, 231, 135, 0.55) 51%, transparent 52%),
@@ -853,8 +853,8 @@ body {
 }
 
 .bio-profile {
-	width: 132px;
-	height: 132px;
+	width: 180px;
+	height: 180px;
 	border: 2px solid rgba(126, 231, 135, 0.58);
 	border-radius: 50%;
 	object-fit: cover;
@@ -1088,18 +1088,18 @@ body {
 	}
 
 	.bio-profile {
-		width: 112px;
-		height: 112px;
+		width: 140px;
+		height: 140px;
 	}
 
 	.bio-profile-scene::before {
-		width: 174px;
-		height: 174px;
+		width: 206px;
+		height: 206px;
 	}
 
 	.bio-profile-scene::after {
-		width: 148px;
-		height: 148px;
+		width: 178px;
+		height: 178px;
 	}
 
 	.bio-link-card {
