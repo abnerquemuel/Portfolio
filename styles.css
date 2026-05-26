@@ -817,54 +817,56 @@ body::after {
 .cap-orbit {
 	position: relative;
 	z-index: 1;
-	width: 170px;
-	height: 82px;
+	width: 190px;
+	height: 100px;
 	animation: cap-bounce 1.7s ease-in-out infinite;
 }
 
 .grad-cap {
 	position: absolute;
-	left: 22px;
-	top: 22px;
-	width: 78px;
-	height: 44px;
-	background: linear-gradient(135deg, #0f172a, #1f2937 55%, #f59e0b 56%, #111827 62%);
-	clip-path: polygon(50% 0, 100% 28%, 50% 58%, 0 28%);
-	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.35));
+	left: 24px;
+	top: 12px;
+	width: 112px;
+	height: 82px;
+	filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.42));
 	transform: rotate(-13deg);
 }
 
 .grad-cap::before {
 	content: "";
 	position: absolute;
-	left: 30px;
-	top: 31px;
-	width: 22px;
-	height: 18px;
-	border-radius: 0 0 6px 6px;
-	background: #111827;
+	left: 0;
+	top: 0;
+	width: 108px;
+	height: 62px;
+	background: linear-gradient(135deg, #0f172a 0%, #1f2937 48%, #f59e0b 50%, #111827 57%, #020617 100%);
+	clip-path: polygon(50% 0, 100% 31%, 50% 64%, 0 31%);
 }
 
 .grad-cap::after {
 	content: "";
 	position: absolute;
-	left: 67px;
-	top: 22px;
-	width: 3px;
-	height: 38px;
-	background: #f97316;
-	transform: rotate(14deg);
+	left: 88px;
+	top: 29px;
+	width: 4px;
+	height: 48px;
+	border-radius: 999px;
+	background: linear-gradient(180deg, #facc15, #f97316 55%, #ef4444);
+	box-shadow: 0 43px 0 3px #fb923c;
+	transform: rotate(15deg);
 	transform-origin: top;
 }
 
 .grad-cap b {
 	position: absolute;
-	left: 67px;
-	top: 55px;
-	width: 8px;
-	height: 18px;
-	border-radius: 999px;
-	background: #fb923c;
+	left: 31px;
+	top: 41px;
+	width: 50px;
+	height: 29px;
+	border-radius: 0 0 10px 10px;
+	background: linear-gradient(180deg, #1f2937 0%, #020617 100%);
+	box-shadow: inset 0 5px 0 rgba(255, 255, 255, 0.06), 0 7px 10px rgba(0, 0, 0, 0.25);
+	clip-path: polygon(10% 0, 90% 0, 78% 100%, 22% 100%);
 }
 
 .diploma-roll {
